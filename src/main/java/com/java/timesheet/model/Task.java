@@ -21,7 +21,6 @@ public class Task {
     private Date dateFinT;
     @Column (name="etat")
     private boolean etat;
-
     @Column (name="estimation")
     private float estimation;
 

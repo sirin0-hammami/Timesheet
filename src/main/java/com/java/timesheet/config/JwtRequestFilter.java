@@ -32,7 +32,9 @@ public class JwtRequestFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
             throws ServletException, IOException {
-
+        if(request.getServletPath().equals("/authenticate")){
+            chain.doFilter(request,response);
+        }else {
         final String requestTokenHeader = request.getHeader("Authorization");
 
         String username = null;
@@ -57,7 +59,6 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 
             // if token is valid configure Spring Security to manually set authentication
             if (jwtTokenUtil.validateToken(jwtToken, userDetails)) {
-
                 UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(
                         userDetails, null, userDetails.getAuthorities());
                 usernamePasswordAuthenticationToken
@@ -68,5 +69,5 @@ public class JwtRequestFilter extends OncePerRequestFilter {
             }
         }
         chain.doFilter(request, response);
-    }
+    }}
 }

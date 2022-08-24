@@ -13,7 +13,7 @@ public class User implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long idUser;
+    private Long idUser;
     @Column (name="nom", nullable = false)
     private String nom;
     @Column (name="prenom", nullable = false)
@@ -21,7 +21,8 @@ public class User implements UserDetails {
     @Column (name="email", nullable = false, unique = true)
     private String email;
     @Column (name="role")
-    private String role;
+    @Enumerated(EnumType.STRING)
+    private Role role;
     @Column(nullable = false)
     private String password;
 
@@ -77,21 +78,20 @@ public class User implements UserDetails {
         this.email = email;
     }
 
-    public String getRole() {
+    public Role getRole() {
         return role;
     }
 
-    public void setRole(String role) {
+    public void setRole(Role role) {
         this.role = role;
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-       return Collections.singleton(new SimpleGrantedAuthority(this.getRole()));}
-
+       return Collections.singleton(new SimpleGrantedAuthority(this.getRole().toString()));}
 
     public String getPassword() {
-        return password;
+        return this.password;
     }
 
     @Override
@@ -123,14 +123,10 @@ public class User implements UserDetails {
         this.password = password;
     }
 
-
    public Set<Task> getTasksOfUser() {
         return tasksOfUser;
     }
-
     public void setTasksOfUser(Set<Task> tasksOfUser) {
         this.tasksOfUser = tasksOfUser;
     }
-
-
 }

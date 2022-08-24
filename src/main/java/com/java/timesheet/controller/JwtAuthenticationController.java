@@ -4,6 +4,7 @@ import java.util.Objects;
 import com.java.timesheet.config.JwtTokenUtil;
 import com.java.timesheet.model.JwtRequest;
 import com.java.timesheet.model.JwtResponse;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -22,6 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @CrossOrigin
+@Slf4j
 public class JwtAuthenticationController {
 
     @Autowired
@@ -41,7 +43,6 @@ public class JwtAuthenticationController {
 
         final UserDetails userDetails = jwtInMemoryUserDetailsService
                 .loadUserByUsername(authenticationRequest.getUsername());
-
         final String token = jwtTokenUtil.generateToken(userDetails);
 
         return ResponseEntity.ok(new JwtResponse(token));

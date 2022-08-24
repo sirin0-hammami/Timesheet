@@ -16,8 +16,8 @@ import javax.transaction.Transactional;
 public class UserService {
     @Autowired
     private UserRepository userRepository;
+    @Autowired
     private PointageService pointageService;
-
 
     public List<User> getAllUsers()
     {
@@ -38,7 +38,7 @@ public class UserService {
         return user;
     }
 
-    public User getUserByEmail( String email) {
+    public User getUserByEmail(String email) {
         User user = userRepository.findByEmail(email);
         return user;
     }
