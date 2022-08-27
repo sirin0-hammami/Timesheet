@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import java.util.Set;
 
 @Service
-public class NoteService {
+public class NoteServiceImpl {
     @Autowired
     private NoteRepository noteRepository;
     @Autowired
@@ -43,8 +43,6 @@ public class NoteService {
     public void deleteNote(Long id){
         Note note = noteRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("note not found"));
         noteRepository.delete(note);
-
-
     }
 
 }

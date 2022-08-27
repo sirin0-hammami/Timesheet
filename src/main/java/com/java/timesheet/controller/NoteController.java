@@ -1,21 +1,17 @@
 package com.java.timesheet.controller;
 
 import com.java.timesheet.model.Note;
-import com.java.timesheet.model.Task;
-import com.java.timesheet.service.NoteService;
+import com.java.timesheet.service.NoteServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Set;
 
 @RestController
 @RequestMapping
 public class NoteController {
     @Autowired
-    private NoteService noteService;
+    private NoteServiceImpl noteService;
 
     @RequestMapping(value="/note/{id}")
     public Note getNotebyId(@PathVariable(value = "id") Long id) {

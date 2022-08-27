@@ -26,6 +26,10 @@ public class User implements UserDetails {
     @Column(nullable = false)
     private String password;
 
+    @OneToOne(cascade=CascadeType.ALL)
+    @JoinColumn(name = "image_id", referencedColumnName = "id")
+    private Image image;
+
     @JsonIgnore
     @OneToMany( mappedBy = "user" , cascade = CascadeType.ALL,orphanRemoval = true)
     private Set<Task> tasksOfUser = new HashSet<>();
@@ -128,5 +132,12 @@ public class User implements UserDetails {
     }
     public void setTasksOfUser(Set<Task> tasksOfUser) {
         this.tasksOfUser = tasksOfUser;
+    }
+
+    public Image getImage() {
+        return image;
+    }
+    public void setImage(Image image) {
+        this.image = image;
     }
 }
